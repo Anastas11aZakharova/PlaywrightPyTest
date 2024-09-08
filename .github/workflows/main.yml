@@ -62,9 +62,9 @@
             uses: rtCamp/action-slack-notify@v2
             env:
               SLACK_CHANNEL: ci-results
-              SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-              SLACK_MESSAGE: 'Test Results are available in the link below:' + ${{ secrets.GH_ACTIONS_URL }}
-              SLACK_TITLE: ${{ secrets.GH_ACTIONS_URL }}
+              SLACK_COLOR: ${{ job.status }}
+              SLACK_MESSAGE: ${{ secrets.GH_ACTIONS_URL }}
+              SLACK_TITLE: 'Test Results are available in the link in the Message:'
               SLACK_USERNAME: bot
               SLACK_WEBHOOK: ${{ secrets.ACTION_MONITORING_SLACK }}
 #          - name: Report Status to Slack
