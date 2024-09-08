@@ -60,10 +60,12 @@
 
           - name: Report Status to Slack
             if: always()
-            uses: ravsamhq/notify-slack-action@v2
+            uses: ravsamhq/notify-slack-action@2.5.0
             with:
               status: ${{ job.status }}
-              message_format: ${{ secrets.GH_ACTIONS_URL }}
+              notification_title: "{workflow} has {status_message}"
+              message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+              footer: ${{ secrets.GH_ACTION_URL }}
               notify_when: "success,failure"
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
