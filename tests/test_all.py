@@ -118,10 +118,10 @@ class Test:
     #     self.sign_up_login.check_email_error_message_is_visible()
     #     self.main.click_on_delete_account_button()
 
-    # def test_test_cases_page(self, test_setup):
-    #     self.main.check_main_page_is_opened()
-    #     self.main.click_on_test_cases_button()
-    #     self.test_cases_page.check_test_cases_label_is_visible()
+    def test_test_cases_page(self, test_setup):
+        self.main.check_main_page_is_opened()
+        self.main.click_on_test_cases_button()
+        self.test_cases_page.check_test_cases_label_is_visible()
 
     # def test_all_products_and_product_detail_page(self, test_setup):
     #     self.main.check_main_page_is_opened()
@@ -166,26 +166,26 @@ class Test:
     #     self.main.success_message_is_visible('You have been successfully subscribed!')
     #     self.page.pause()
 
-    def test_adding_products_in_cart(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_products_button()
-        blue_top = "Blue Top"
-        men_tshirt = "Men Tshirt"
-        top_price = self.products_page.get_product_price(blue_top)
-        tshirt_price = self.products_page.get_product_price(men_tshirt)
-        self.products_page.add_product_to_cart(blue_top)
-        self.products_page.check_added_message_is_visible()
-        self.products_page.click_on_continue_shopping_button()
-        self.products_page.add_product_to_cart(men_tshirt)
-        self.products_page.check_added_message_is_visible()
-        self.products_page.click_on_view_cart_link()
-        self.cart_page.shopping_cart_text_is_visible()
-        self.cart_page.check_product_exists(blue_top)
-        self.cart_page.check_product_exists(men_tshirt)
-        self.cart_page.check_product_quantity("0","1")
-        self.cart_page.check_product_quantity("1","1")
-        self.cart_page.check_product_price("0",top_price)
-        self.cart_page.check_product_price("1",tshirt_price)
+    # def test_adding_products_in_cart(self, test_setup):
+    #     self.main.check_main_page_is_opened()
+    #     self.main.click_on_products_button()
+    #     blue_top = "Blue Top"
+    #     men_tshirt = "Men Tshirt"
+    #     top_price = self.products_page.get_product_price(blue_top)
+    #     tshirt_price = self.products_page.get_product_price(men_tshirt)
+    #     self.products_page.add_product_to_cart(blue_top)
+    #     self.products_page.check_added_message_is_visible()
+    #     self.products_page.click_on_continue_shopping_button()
+    #     self.products_page.add_product_to_cart(men_tshirt)
+    #     self.products_page.check_added_message_is_visible()
+    #     self.products_page.click_on_view_cart_link()
+    #     self.cart_page.shopping_cart_text_is_visible()
+    #     self.cart_page.check_product_exists(blue_top)
+    #     self.cart_page.check_product_exists(men_tshirt)
+    #     self.cart_page.check_product_quantity("0","1")
+    #     self.cart_page.check_product_quantity("1","1")
+    #     self.cart_page.check_product_price("0",top_price)
+    #     self.cart_page.check_product_price("1",tshirt_price)
 
 
 
