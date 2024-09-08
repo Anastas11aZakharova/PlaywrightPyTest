@@ -64,7 +64,8 @@
             with:
               status: ${{ job.status }}
               notification_title: "{workflow} has {status_message}"
-              message_format: "{emoji} *{workflow}* {status_message} in  ${{ secrets.GH_ACTIONS_URL }}"
+              message_format: "{emoji} *{workflow}* {status_message}"
+              footer: "Linked Repo ${{ secrets.GH_ACTIONS_URL }}|{repo}>"
               notify_when: "success,failure"
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
