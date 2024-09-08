@@ -58,14 +58,23 @@
               PUBLISH_BRANCH: gh-pages
               PUBLISH_DIR: allure-history
 
-          - name: Report Status to Slack
-            if: always()
-            uses: ravsamhq/notify-slack-action@2.5.0
-            with:
-              status: ${{ job.status }}
-              notification_title: "{workflow} has {status_message}"
-              message_format: "{emoji} *{workflow}* {status_message} Test Results are available in the link below:"
-              footer: "${{ secrets.GH_ACTIONS_URL }}"
-              notify_when: "success,failure"
+          - name: Slack Notification
+            uses: rtCamp/action-slack-notify@v2
             env:
-              SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+              SLACK_CHANNEL: ci-results
+              SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+              SLACK_MESSAGE: 'Test Results are available in the link below:'
+              SLACK_TITLE: ${{ secrets.GH_ACTIONS_URL }}
+              SLACK_USERNAME: bot
+              SLACK_WEBHOOK: ${{ secrets.ACTION_MONITORING_SLACK }}
+#          - name: Report Status to Slack
+#            if: always()
+#            uses: ravsamhq/notify-slack-action@2.5.0
+#            with:
+#              status: ${{ job.status }}
+#              notification_title: "{workflow} has {status_message}"
+#              message_format: "{emoji} *{workflow}* {status_message} Test Results are available in the link below:"
+#              footer: "${{ secrets.GH_ACTIONS_URL }}"
+#              notify_when: "success,failure"
+#            env:
+#              SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
