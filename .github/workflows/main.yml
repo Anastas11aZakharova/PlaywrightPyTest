@@ -38,4 +38,4 @@
               playwright install firefox
 
           - name: Run tests
-            run: pytest --headed --browser_name=firefox
+            run: pytest --browser_name=firefox
