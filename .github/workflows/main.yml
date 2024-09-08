@@ -64,9 +64,10 @@
               SLACK_CHANNEL: ci-results
               SLACK_COLOR: ${{ job.status }}
               SLACK_MESSAGE: ${{ secrets.GH_ACTIONS_URL }}
-              SLACK_TITLE: 'Test Results are available in the link in the Message:'
+              SLACK_TITLE: 'Test Results are available in the link in the Message: "$GH_PAGES_URL" '
               SLACK_USERNAME: bot
               SLACK_WEBHOOK: ${{ secrets.ACTION_MONITORING_SLACK }}
+              GH_PAGES_URL: ${{ secrets.GH_ACTIONS_URL }}
 #          - name: Report Status to Slack
 #            if: always()
 #            uses: ravsamhq/notify-slack-action@2.5.0
