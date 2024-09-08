@@ -40,7 +40,7 @@
           - name: Run tests
             run: pytest --browser_name=firefox --alluredir=./reports --clean-alluredir
 
-          - name: Allure Report action from marketplace
+          - name: Allure Report generation
             uses: simple-elf/allure-report-action@master
             if: always()
             #id: allure-report
@@ -58,14 +58,14 @@
               PUBLISH_BRANCH: gh-pages
               PUBLISH_DIR: allure-history
 
-          - name: Report Status
+          - name: Report Status to Slack
             if: always()
             uses: ravsamhq/notify-slack-action@2.5.0
             with:
               status: ${{ job.status }}
               notification_title: "{workflow} has {status_message}"
               message_format: "{emoji} *{workflow}* {status_message} Test Results are available in the link below:"
-              footer: ${{ secrets.GH_ACTIONS_URL }}
+              footer: "${{ secrets.GH_ACTIONS_URL }}"
               notify_when: "success,failure"
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
