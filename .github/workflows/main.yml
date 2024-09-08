@@ -7,6 +7,10 @@
     on:
       # Allows you to run this workflow manually from the Actions tab
       workflow_dispatch:
+      push:
+        branches: [ main, master ]
+      pull_request:
+        branches: [ main, master ]
 
     # A workflow run is made up of one or more jobs that can run sequentially or in parallel
     jobs:
@@ -31,7 +35,7 @@
               python -m pip install --upgrade pip
               pip install pipenv
               pipenv install --system
-              playwright install chromium
+              playwright install firefox
 
           - name: Run tests
-            run: pytest
+            run: pytest --browser_name=firefox
