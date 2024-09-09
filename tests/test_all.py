@@ -46,6 +46,7 @@ class Test:
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
         self.main.check_logged_in_username('Thomas')
+        take_screenshot(self.page, 'registered_user')
         self.main.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
         self.account_deleted_page.click_on_continue_button()
@@ -68,6 +69,7 @@ class Test:
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
         self.main.check_logged_in_username('Thomas')
+        take_screenshot(self.page, 'valid_login')
         self.main.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
@@ -79,6 +81,7 @@ class Test:
         self.sign_up_login_page.enter_login_password('qwerty')
         self.sign_up_login_page.click_on_login_button()
         self.sign_up_login_page.check_error_message_is_visible()
+        take_screenshot(self.page, 'invalid_login')
 
     def test_logout(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -100,6 +103,7 @@ class Test:
         self.main.check_logged_in_username('Thomas')
         self.main.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
+        take_screenshot(self.page, 'logout')
         self.sign_up_login_page.enter_login_email('thomas@email.com')
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
@@ -127,6 +131,7 @@ class Test:
         self.sign_up_login_page.enter_email('thomas@email.com')
         self.sign_up_login_page.click_on_sign_up_button()
         self.sign_up_login_page.check_email_error_message_is_visible()
+        take_screenshot(self.page, 'existing_email_error')
         self.sign_up_login_page.enter_login_email('thomas@email.com')
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
@@ -142,11 +147,13 @@ class Test:
         self.contact_us_page.upload_file()
         self.contact_us_page.click_on_submit_button()
         self.contact_us_page.success_message_is_visible()
+        take_screenshot(self.page, 'contact_us_form')
 
     def test_test_cases_page(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_test_cases_button()
         self.test_cases_page.check_test_cases_label_is_visible()
+        take_screenshot(self.page, 'test_cases_page')
 
     def test_all_products_and_product_detail_page(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -161,6 +168,7 @@ class Test:
         self.product_detail_page.check_availability_is_visible()
         self.product_detail_page.check_condition_is_visible()
         self.product_detail_page.check_brand_is_visible()
+        take_screenshot(self.page, 'product_details_visible')
 
     def test_search_product(self, test_setup):
         searched_product = 'Winter Top'
@@ -170,6 +178,7 @@ class Test:
         self.products_page.enter_product_name_in_search_field(searched_product)
         self.products_page.click_on_search_button()
         self.products_page.check_found_product_is_visible(searched_product)
+        take_screenshot(self.page, 'search_product')
 
     def test_subscription_in_home_page(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -177,6 +186,7 @@ class Test:
         self.main.enter_email_in_your_email_address_field('qwerty@email.com')
         self.main.click_on_subscribe_button()
         self.main.success_message_is_visible('You have been successfully subscribed!')
+        take_screenshot(self.page, 'subscription_home_page')
 
     def test_subscription_in_cart_page(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -186,6 +196,7 @@ class Test:
         self.main.enter_email_in_your_email_address_field('qwerty@email.com')
         self.main.click_on_subscribe_button()
         self.main.success_message_is_visible('You have been successfully subscribed!')
+        take_screenshot(self.page, 'subscription_cart_page')
 
     def test_adding_products_in_cart(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -207,6 +218,7 @@ class Test:
         self.cart_page.check_product_quantity("1","1")
         self.cart_page.check_product_price("0",top_price)
         self.cart_page.check_product_price("1",tshirt_price)
+        take_screenshot(self.page, 'add_prodcuts_to_cart')
 
     def test_product_quantity_in_cart(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -218,6 +230,7 @@ class Test:
         self.product_detail_page.success_message_is_visible()
         self.product_detail_page.click_on_view_cart_button()
         self.cart_page.check_product_quantity("0", quantity)
+        take_screenshot(self.page, 'quantity_in_cart')
 
     def test_register_while_checkout(self, test_setup):
         self.main.check_main_page_is_opened()
@@ -248,6 +261,7 @@ class Test:
         self.payment_page.enter_valid_payment_data()
         self.payment_page.click_pay_and_confirm_button()
         self.order_placed_page.check_success_message_is_visible()
+        take_screenshot(self.page, 'register_while_checkout')
         self.order_placed_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
@@ -276,6 +290,7 @@ class Test:
         self.payment_page.enter_valid_payment_data()
         self.payment_page.click_pay_and_confirm_button()
         self.order_placed_page.check_success_message_is_visible()
+        take_screenshot(self.page, 'registered_before_checkout')
         self.order_placed_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
