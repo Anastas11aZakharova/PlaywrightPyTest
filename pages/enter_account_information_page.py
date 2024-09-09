@@ -50,4 +50,3 @@ class EnterAccountInformation():
         self.__address_information_zip_code.fill('1234')
         self.__address_information_mobile_number.fill('3486986947')
         self.__address_information_create_account_btn.click()
-        # self.page.pause()
