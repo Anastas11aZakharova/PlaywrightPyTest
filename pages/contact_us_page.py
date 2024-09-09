@@ -38,18 +38,18 @@ class ContactUs():
         self.__subject_field.fill("QWERTY")
         self.__your_message_here_field.fill("qwertyqwerty")
 
-    def handle_dialog(self, dialog):
-        if "Press OK to proceed!" in dialog.message:
-            print(f'clicking "Yes" to {dialog.message}')
-            dialog.accept()  # press "Yes"
-        else:
-            dialog.dismiss()  # press "No"
+    # def handle_dialog(self, dialog):
+    #     if "Press OK to proceed!" in dialog.message:
+    #         print(f'clicking "Yes" to {dialog.message}')
+    #         dialog.accept()  # press "Yes"
+    #     else:
+    #         dialog.dismiss()  # press "No"
 
     def upload_file(self) -> None:
         self.__choose_file_button.set_input_files("data/test.txt")
 
     def click_on_submit_button(self) -> None:
-        self.page.on("dialog", self.handle_dialog)
+        # self.page.on("dialog", self.handle_dialog)
         self.__submit_button.click()
 
     def success_message_is_visible(self) -> None:
