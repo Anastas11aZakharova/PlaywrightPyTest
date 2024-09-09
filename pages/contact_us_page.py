@@ -51,6 +51,9 @@ class ContactUs():
     def click_on_submit_button(self) -> None:
         # self.page.on("dialog", self.handle_dialog)
         self.__submit_button.click()
+        self.page.on("dialog", lambda dialog: dialog.accept())
+        self.__submit_button.click()
+
 
     def success_message_is_visible(self) -> None:
         self.__success_message.wait_for(state='visible')
