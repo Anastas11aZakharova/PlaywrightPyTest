@@ -1,3 +1,4 @@
+from faker import Faker
 from playwright.sync_api import Page, expect
 
 
@@ -29,10 +30,11 @@ class ContactUs():
         expect(self.__your_message_here_field).to_be_visible()
 
     def enter_valid_get_in_touch_data(self) -> None:
-        self.__name_field.fill("Thomas")
-        self.__email_field.fill("qwerty@email.com")
-        self.__subject_field.fill("QWERTY")
-        self.__your_message_here_field.fill("qwertyqwerty")
+        fake = Faker()
+        self.__name_field.fill(fake.first_name())
+        self.__email_field.fill(fake.email())
+        self.__subject_field.fill(fake.word())
+        self.__your_message_here_field.fill(fake.sentence(5))
 
     def upload_file(self) -> None:
         self.__choose_file_btn.set_input_files("data/test.txt")
@@ -43,5 +45,4 @@ class ContactUs():
         self.__submit_btn.click()
 
     def success_message_is_visible(self) -> None:
-        self.__success_message.wait_for(state='visible')
         expect(self.__success_message).to_be_visible()
