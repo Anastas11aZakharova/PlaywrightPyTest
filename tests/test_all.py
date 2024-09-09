@@ -20,9 +20,9 @@ class Test:
     @pytest.fixture
     def test_setup(self, new_page):
         self.page = new_page
-        self.main = Main(self.page)
+        self.main_page = Main(self.page)
         self.sign_up_login_page = SignUpLogin(self.page)
-        self.enter_account_information = EnterAccountInformation(self.page)
+        self.enter_account_information_page = EnterAccountInformation(self.page)
         self.account_created_page = AccountCreated(self.page)
         self.account_deleted_page = AccountDeleted(self.page)
         self.test_cases_page = TestCases(self.page)
@@ -36,49 +36,49 @@ class Test:
 
     @pytest.mark.registration_and_login
     def test_register_user(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_name("Thomas")
         self.sign_up_login_page.enter_email("thomas@email.com")
         self.sign_up_login_page.click_on_sign_up_button()
-        self.enter_account_information.check_enter_account_information_label_is_visible()
-        self.enter_account_information.enter_valid_data()
+        self.enter_account_information_page.check_enter_account_information_label_is_visible()
+        self.enter_account_information_page.enter_valid_data()
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
-        self.main.check_logged_in_username('Thomas')
+        self.main_page.check_logged_in_username('Thomas')
         take_screenshot(self.page, 'registered_user')
-        self.main.click_on_delete_account_button()
+        self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
         self.account_deleted_page.click_on_continue_button()
 
     @pytest.mark.registration_and_login
     def test_valid_login(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_name('Thomas')
         self.sign_up_login_page.enter_email('thomas@email.com')
         self.sign_up_login_page.click_on_sign_up_button()
-        self.enter_account_information.check_enter_account_information_label_is_visible()
-        self.enter_account_information.enter_valid_data()
+        self.enter_account_information_page.check_enter_account_information_label_is_visible()
+        self.enter_account_information_page.enter_valid_data()
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_logout_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_login_email('thomas@email.com')
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
-        self.main.check_logged_in_username('Thomas')
+        self.main_page.check_logged_in_username('Thomas')
         take_screenshot(self.page, 'valid_login')
-        self.main.click_on_delete_account_button()
+        self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
     @pytest.mark.registration_and_login
     def test_invalid_login(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_login_email('qwerty@email.com')
         self.sign_up_login_page.enter_login_password('qwerty')
@@ -88,49 +88,49 @@ class Test:
 
     @pytest.mark.registration_and_login
     def test_logout(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_name('Thomas')
         self.sign_up_login_page.enter_email('thomas@email.com')
         self.sign_up_login_page.click_on_sign_up_button()
-        self.enter_account_information.check_enter_account_information_label_is_visible()
-        self.enter_account_information.enter_valid_data()
+        self.enter_account_information_page.check_enter_account_information_label_is_visible()
+        self.enter_account_information_page.enter_valid_data()
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_logout_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_login_email('thomas@email.com')
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_logout_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         take_screenshot(self.page, 'logout')
         self.sign_up_login_page.enter_login_email('thomas@email.com')
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_delete_account_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
     @pytest.mark.registration_and_login
     def test_register_with_existing_email(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_name('Thomas')
         self.sign_up_login_page.enter_email('thomas@email.com')
         self.sign_up_login_page.click_on_sign_up_button()
-        self.enter_account_information.check_enter_account_information_label_is_visible()
-        self.enter_account_information.enter_valid_data()
+        self.enter_account_information_page.check_enter_account_information_label_is_visible()
+        self.enter_account_information_page.enter_valid_data()
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_logout_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.sign_up_login_page.enter_name('John')
         self.sign_up_login_page.enter_email('thomas@email.com')
@@ -140,14 +140,14 @@ class Test:
         self.sign_up_login_page.enter_login_email('thomas@email.com')
         self.sign_up_login_page.enter_login_password('asdfg')
         self.sign_up_login_page.click_on_login_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_delete_account_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
     @pytest.mark.other_pages
     def test_contact_us_form(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_contact_us_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_contact_us_button()
         self.contact_us_page.get_in_touch_is_visible()
         self.contact_us_page.enter_valid_get_in_touch_data()
         self.contact_us_page.upload_file()
@@ -157,15 +157,15 @@ class Test:
 
     @pytest.mark.other_pages
     def test_test_cases_page(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_test_cases_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_test_cases_button()
         self.test_cases_page.check_test_cases_label_is_visible()
         take_screenshot(self.page, 'test_cases_page')
 
     @pytest.mark.other_pages
     def test_all_products_and_product_detail_page(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_products_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_products_button()
         self.products_page.check_all_products_title_is_visible()
         self.products_page.check_all_products_list_is_visible()
         self.products_page.click_on_blue_top_view_product()
@@ -181,8 +181,8 @@ class Test:
     @pytest.mark.other_pages
     def test_search_product(self, test_setup):
         searched_product = 'Winter Top'
-        self.main.check_main_page_is_opened()
-        self.main.click_on_products_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_products_button()
         self.products_page.check_all_products_title_is_visible()
         self.products_page.enter_product_name_in_search_field(searched_product)
         self.products_page.click_on_search_button()
@@ -191,28 +191,28 @@ class Test:
 
     @pytest.mark.other_pages
     def test_subscription_in_home_page(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.check_subscription_text_is_visible()
-        self.main.enter_email_in_your_email_address_field('qwerty@email.com')
-        self.main.click_on_subscribe_button()
-        self.main.success_message_is_visible('You have been successfully subscribed!')
+        self.main_page.check_main_page_is_opened()
+        self.main_page.check_subscription_text_is_visible()
+        self.main_page.enter_email_in_your_email_address_field('qwerty@email.com')
+        self.main_page.click_on_subscribe_button()
+        self.main_page.success_message_is_visible('You have been successfully subscribed!')
         take_screenshot(self.page, 'subscription_home_page')
 
     @pytest.mark.cart
     def test_subscription_in_cart_page(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_cart_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_cart_button()
         self.cart_page.shopping_cart_text_is_visible()
-        self.main.check_subscription_text_is_visible()
-        self.main.enter_email_in_your_email_address_field('qwerty@email.com')
-        self.main.click_on_subscribe_button()
-        self.main.success_message_is_visible('You have been successfully subscribed!')
+        self.main_page.check_subscription_text_is_visible()
+        self.main_page.enter_email_in_your_email_address_field('qwerty@email.com')
+        self.main_page.click_on_subscribe_button()
+        self.main_page.success_message_is_visible('You have been successfully subscribed!')
         take_screenshot(self.page, 'subscription_cart_page')
 
     @pytest.mark.cart
     def test_adding_products_in_cart(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_products_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_products_button()
         blue_top = "Blue Top"
         men_tshirt = "Men Tshirt"
         top_price = self.products_page.get_product_price(blue_top)
@@ -234,8 +234,8 @@ class Test:
 
     @pytest.mark.cart
     def test_product_quantity_in_cart(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_view_product_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_view_product_button()
         self.product_detail_page.check_product_name_is_visible()
         quantity = '4'
         self.product_detail_page.enter_quantity(quantity)
@@ -247,10 +247,10 @@ class Test:
 
     @pytest.mark.registration_and_login
     def test_register_while_checkout(self, test_setup):
-        self.main.check_main_page_is_opened()
+        self.main_page.check_main_page_is_opened()
         blue_top = 'Blue Top'
-        self.main.add_product_to_cart(blue_top)
-        self.main.click_on_view_cart_link()
+        self.main_page.add_product_to_cart(blue_top)
+        self.main_page.click_on_view_cart_link()
         self.cart_page.shopping_cart_text_is_visible()
         self.cart_page.click_on_proceed_to_checkout_button()
         self.cart_page.checkout_message_is_visible()
@@ -259,12 +259,12 @@ class Test:
         self.sign_up_login_page.enter_name("Thomas")
         self.sign_up_login_page.enter_email("thomas@email.com")
         self.sign_up_login_page.click_on_sign_up_button()
-        self.enter_account_information.check_enter_account_information_label_is_visible()
-        self.enter_account_information.enter_valid_data()
+        self.enter_account_information_page.check_enter_account_information_label_is_visible()
+        self.enter_account_information_page.enter_valid_data()
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
-        self.main.check_logged_in_username('Thomas')
-        self.main.click_on_cart_button()
+        self.main_page.check_logged_in_username('Thomas')
+        self.main_page.click_on_cart_button()
         self.cart_page.click_on_proceed_to_checkout_button()
         self.address_details_page.check_address_details_header_is_visible()
         self.address_details_page.check_review_your_order_header_is_visible()
@@ -281,19 +281,19 @@ class Test:
 
     @pytest.mark.registration_and_login
     def test_register_before_checkout(self, test_setup):
-        self.main.check_main_page_is_opened()
-        self.main.click_on_sign_up_login_button()
+        self.main_page.check_main_page_is_opened()
+        self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.enter_name("Thomas")
         self.sign_up_login_page.enter_email("thomas@email.com")
         self.sign_up_login_page.click_on_sign_up_button()
-        self.enter_account_information.check_enter_account_information_label_is_visible()
-        self.enter_account_information.enter_valid_data()
+        self.enter_account_information_page.check_enter_account_information_label_is_visible()
+        self.enter_account_information_page.enter_valid_data()
         self.account_created_page.account_created_mesage_is_visible()
         self.account_created_page.click_on_continue_button()
-        self.main.check_logged_in_username('Thomas')
+        self.main_page.check_logged_in_username('Thomas')
         blue_top = 'Blue Top'
-        self.main.add_product_to_cart(blue_top)
-        self.main.click_on_view_cart_link()
+        self.main_page.add_product_to_cart(blue_top)
+        self.main_page.click_on_view_cart_link()
         self.cart_page.shopping_cart_text_is_visible()
         self.cart_page.click_on_proceed_to_checkout_button()
         self.address_details_page.check_address_details_header_is_visible()

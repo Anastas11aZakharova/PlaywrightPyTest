@@ -10,8 +10,8 @@ class ContactUs():
         self.__email_field = self.page.locator('input[data-qa="email"]')
         self.__subject_field = self.page.locator('input[data-qa="subject"]')
         self.__your_message_here_field = self.page.locator('textarea[data-qa="message"]')
-        self.__choose_file_button = self.page.locator('input[name="upload_file"]')
-        self.__submit_button = self.page.locator('input[data-qa="submit-button"]')
+        self.__choose_file_btn = self.page.locator('input[name="upload_file"]')
+        self.__submit_btn = self.page.locator('input[data-qa="submit-button"]')
         self.__success_message = self.page.locator('div[class="status alert alert-success"]')
 
     def get_in_touch_is_visible(self) -> None:
@@ -35,12 +35,12 @@ class ContactUs():
         self.__your_message_here_field.fill("qwertyqwerty")
 
     def upload_file(self) -> None:
-        self.__choose_file_button.set_input_files("data/test.txt")
+        self.__choose_file_btn.set_input_files("data/test.txt")
 
     def click_on_submit_button(self) -> None:
-        self.__submit_button.click()
+        self.__submit_btn.click()
         self.page.on("dialog", lambda dialog: dialog.accept())
-        self.__submit_button.click()
+        self.__submit_btn.click()
 
     def success_message_is_visible(self) -> None:
         self.__success_message.wait_for(state='visible')

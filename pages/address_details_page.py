@@ -8,7 +8,7 @@ class AddressDetails():
         self.__address_details_header = self.page.get_by_text('Address Details')
         self.__review_your_order_header = self.page.get_by_text('Review Your Order')
         self.__text_area = self.page.locator('textarea[class="form-control"]')
-        self.__place_order_button = self.page.get_by_text('Place Order')
+        self.__place_order_btn = self.page.get_by_text('Place Order')
 
     def check_address_details_header_is_visible(self) -> None:
         self.__address_details_header.wait_for(state='visible')
@@ -22,4 +22,4 @@ class AddressDetails():
         self.__text_area.fill(text)
 
     def click_on_place_order_button(self) -> None:
-        self.__place_order_button.click()
+        self.__place_order_btn.click()

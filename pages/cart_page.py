@@ -8,10 +8,10 @@ class Cart():
         self.__shopping_cart_text = self.page.get_by_text('Shopping Cart')
         self.__subscription_text = self.page.get_by_text('Subscription')
         self.__your_email_address_field = self.page.locator('input[id="susbscribe_email"]')
-        self.__subscribe_button = self.page.locator('button[id="subscribe"]')
+        self.__subscribe_btn = self.page.locator('button[id="subscribe"]')
         self.__success_message = self.page.locator('div[id="success-subscribe"]')
         self.__cart_info_table = self.page.locator('table[id="cart_info_table"]')
-        self.__proceed_to_checkout_button = self.page.get_by_text('Proceed To Checkout')
+        self.__proceed_to_checkout_btn = self.page.get_by_text('Proceed To Checkout')
         self.__checkout_message = self.page.get_by_text('Register / Login account to proceed on checkout.')
         self.__register_login_link = self.page.locator('p[class="text-center"]').locator("nth=1")
 
@@ -23,7 +23,7 @@ class Cart():
         self.__your_email_address_field.fill(email)
 
     def click_on_subscribe_button(self) -> None:
-        self.__subscribe_button.click()
+        self.__subscribe_btn.click()
 
     def success_message_is_visible(self, text) -> None:
         self.__success_message.wait_for(state='visible')
@@ -45,7 +45,7 @@ class Cart():
         expect(quantity).to_have_text(expected_price)
 
     def click_on_proceed_to_checkout_button(self) -> None:
-        self.__proceed_to_checkout_button.click()
+        self.__proceed_to_checkout_btn.click()
 
     def checkout_message_is_visible(self) -> None:
         self.__checkout_message.wait_for(state='visible')

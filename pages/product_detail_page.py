@@ -15,7 +15,7 @@ class ProductDetail():
             '//div[@class=\'product-information\']//p//b[contains(text(),\'Condition:\')]/..')
         self.__brand = self.page.locator('//div[@class=\'product-information\']//p//b[contains(text(),\'Brand:\')]/..')
         self.__product_quantity = self.page.locator('input[id="quantity"]')
-        self.__add_to_cart_button = self.page.locator('button[class="btn btn-default cart"]')
+        self.__add_to_cart_btn = self.page.locator('button[class="btn btn-default cart"]')
         self.__success_message = self.page.get_by_text('Your product has been added to cart.')
         self.__view_cart_button = self.page.get_by_text('View Cart').locator("nth=0")
 
@@ -51,7 +51,7 @@ class ProductDetail():
         self.__product_quantity.fill(quantity)
 
     def click_on_add_to_cart_button(self) -> None:
-        self.__add_to_cart_button.click()
+        self.__add_to_cart_btn.click()
 
     def success_message_is_visible(self) -> None:
         self.__success_message.wait_for(state='visible')

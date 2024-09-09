@@ -11,7 +11,7 @@ class Payment():
         self.__cvc_field = self.page.locator('input[data-qa="cvc"]')
         self.__expiration_month_field = self.page.locator('input[data-qa="expiry-month"]')
         self.__expiration_year_field = self.page.locator('input[data-qa="expiry-year"]')
-        self.__pay_and_confirm_order_button = self.page.locator('button[data-qa="pay-button"]')
+        self.__pay_and_confirm_order_btn = self.page.locator('button[data-qa="pay-button"]')
 
     def check_payment_header_is_visible(self) -> None:
         self.__payment_header.wait_for(state='visible')
@@ -37,4 +37,4 @@ class Payment():
         self.__expiration_year_field.fill("2030")
 
     def click_pay_and_confirm_button(self) -> None:
-        self.__pay_and_confirm_order_button.click()
+        self.__pay_and_confirm_order_btn.click()
