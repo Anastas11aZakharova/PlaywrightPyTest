@@ -35,10 +35,10 @@
               python -m pip install --upgrade pip
               pip install pipenv
               pipenv install --system
-              playwright install firefox
+              playwright install chromium
 
           - name: Run tests
-            run: pytest --browser_name=firefox --alluredir=./reports --clean-alluredir
+            run: pytest --browser_name=chromium --alluredir=./reports --clean-alluredir
 
           - name: Allure Report generation
             uses: simple-elf/allure-report-action@master
