@@ -34,6 +34,7 @@ class Test:
         self.order_placed_page = OrderPlaced(self.page)
         self.contact_us_page = ContactUs(self.page)
 
+    @pytest.mark.registration_and_login
     def test_register_user(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_sign_up_login_button()
@@ -51,6 +52,7 @@ class Test:
         self.account_deleted_page.account_deleted_message_is_visible()
         self.account_deleted_page.click_on_continue_button()
 
+    @pytest.mark.registration_and_login
     def test_valid_login(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_sign_up_login_button()
@@ -73,6 +75,7 @@ class Test:
         self.main.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
+    @pytest.mark.registration_and_login
     def test_invalid_login(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_sign_up_login_button()
@@ -83,6 +86,7 @@ class Test:
         self.sign_up_login_page.check_error_message_is_visible()
         take_screenshot(self.page, 'invalid_login')
 
+    @pytest.mark.registration_and_login
     def test_logout(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_sign_up_login_button()
@@ -111,6 +115,7 @@ class Test:
         self.main.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
+    @pytest.mark.registration_and_login
     def test_register_with_existing_email(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_sign_up_login_button()
@@ -139,6 +144,7 @@ class Test:
         self.main.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
+    @pytest.mark.other_pages
     def test_contact_us_form(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_contact_us_button()
@@ -149,12 +155,14 @@ class Test:
         self.contact_us_page.success_message_is_visible()
         take_screenshot(self.page, 'contact_us_form')
 
+    @pytest.mark.other_pages
     def test_test_cases_page(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_test_cases_button()
         self.test_cases_page.check_test_cases_label_is_visible()
         take_screenshot(self.page, 'test_cases_page')
 
+    @pytest.mark.other_pages
     def test_all_products_and_product_detail_page(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_products_button()
@@ -170,6 +178,7 @@ class Test:
         self.product_detail_page.check_brand_is_visible()
         take_screenshot(self.page, 'product_details_visible')
 
+    @pytest.mark.other_pages
     def test_search_product(self, test_setup):
         searched_product = 'Winter Top'
         self.main.check_main_page_is_opened()
@@ -180,6 +189,7 @@ class Test:
         self.products_page.check_found_product_is_visible(searched_product)
         take_screenshot(self.page, 'search_product')
 
+    @pytest.mark.other_pages
     def test_subscription_in_home_page(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.check_subscription_text_is_visible()
@@ -188,6 +198,7 @@ class Test:
         self.main.success_message_is_visible('You have been successfully subscribed!')
         take_screenshot(self.page, 'subscription_home_page')
 
+    @pytest.mark.cart
     def test_subscription_in_cart_page(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_cart_button()
@@ -198,6 +209,7 @@ class Test:
         self.main.success_message_is_visible('You have been successfully subscribed!')
         take_screenshot(self.page, 'subscription_cart_page')
 
+    @pytest.mark.cart
     def test_adding_products_in_cart(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_products_button()
@@ -220,6 +232,7 @@ class Test:
         self.cart_page.check_product_price("1",tshirt_price)
         take_screenshot(self.page, 'add_prodcuts_to_cart')
 
+    @pytest.mark.cart
     def test_product_quantity_in_cart(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_view_product_button()
@@ -232,6 +245,7 @@ class Test:
         self.cart_page.check_product_quantity("0", quantity)
         take_screenshot(self.page, 'quantity_in_cart')
 
+    @pytest.mark.registration_and_login
     def test_register_while_checkout(self, test_setup):
         self.main.check_main_page_is_opened()
         blue_top = 'Blue Top'
@@ -265,6 +279,7 @@ class Test:
         self.order_placed_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
+    @pytest.mark.registration_and_login
     def test_register_before_checkout(self, test_setup):
         self.main.check_main_page_is_opened()
         self.main.click_on_sign_up_login_button()
