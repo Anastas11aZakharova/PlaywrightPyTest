@@ -16,6 +16,7 @@ class Products():
         self.__view_cart_link = self.page.locator('//a[@href=\'/view_cart\']').locator("nth=1")
         self.__product_info = self.page.locator('div[class="productinfo text-center"]')
 
+
     def check_all_products_title_is_visible(self) -> None:
         self.__all_products_title.wait_for(state='visible')
         expect(self.__all_products_title).to_be_visible()

@@ -11,6 +11,9 @@ class Cart():
         self.__subscribe_button = self.page.locator('button[id="subscribe"]')
         self.__success_message = self.page.locator('div[id="success-subscribe"]')
         self.__cart_info_table = self.page.locator('table[id="cart_info_table"]')
+        self.__proceed_to_checkout_button = self.page.get_by_text('Proceed To Checkout')
+        self.__checkout_message = self.page.get_by_text('Register / Login account to proceed on checkout.')
+        self.__register_login_link = self.page.locator('p[class="text-center"]').locator("nth=1")
 
 
     def check_subscription_text_is_visible(self) -> None:
@@ -41,3 +44,13 @@ class Cart():
     def check_product_price(self,nth,expected_price) -> None:
         quantity = self.__cart_info_table.locator("xpath=//td[@class='cart_price']/p").locator("nth=" + nth)
         expect(quantity).to_have_text(expected_price)
+
+    def click_on_proceed_to_checkout_button(self) -> None:
+        self.__proceed_to_checkout_button.click()
+
+    def checkout_message_is_visible(self) -> None:
+        self.__checkout_message.wait_for(state='visible')
+        expect(self.__checkout_message).to_be_visible()
+
+    def click_on_register_login_link(self) -> None:
+        self.__register_login_link.click()

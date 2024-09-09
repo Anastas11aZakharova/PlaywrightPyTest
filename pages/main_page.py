@@ -18,6 +18,10 @@ class Main():
         self.__subscribe_button = self.page.locator('button[id="subscribe"]')
         self.__success_message = self.page.locator('div[id="success-subscribe"]')
         self.__cart_button = self.page.locator('a[href="/view_cart"]').locator("nth=0")
+        self.__view_product_button = self.page.get_by_text('View Product').locator("nth=0")
+        self.__add_to_cart_button = self.page.locator('a[class="btn btn-default add-to-cart"]').locator("nth=0")
+        self.__view_cart_link = self.page.locator('//a[@href=\'/view_cart\']').locator("nth=1")
+        self.__contact_us_button = self.page.locator('a[href="/contact_us"]')
 
 
     def check_main_page_is_opened(self) -> None:
@@ -49,4 +53,11 @@ class Main():
         expect(self.__success_message).to_have_text(text)
     def click_on_cart_button(self) -> None:
         self.__cart_button.click()
-
+    def click_on_view_product_button(self) -> None:
+        self.__view_product_button.click()
+    def add_product_to_cart(self, product_name) -> None:
+        self.__add_to_cart_button.click()
+    def click_on_view_cart_link(self) -> None:
+        self.__view_cart_link.click()
+    def click_on_contact_us_button(self) -> None:
+        self.__contact_us_button.click()
