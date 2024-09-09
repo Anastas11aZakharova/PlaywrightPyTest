@@ -67,7 +67,7 @@ class Main():
     def click_on_view_product_button(self) -> None:
         self.__view_product_btn.click()
 
-    def add_product_to_cart(self, product_name) -> None:
+    def add_product_to_cart(self) -> None:
         self.__add_to_cart_btn.click()
 
     def click_on_view_cart_link(self) -> None:
