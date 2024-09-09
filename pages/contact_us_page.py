@@ -14,10 +14,6 @@ class ContactUs():
         self.__submit_button = self.page.locator('input[data-qa="submit-button"]')
         self.__success_message = self.page.locator('div[class="status alert alert-success"]')
 
-
-
-
-
     def get_in_touch_is_visible(self) -> None:
         self.__get_in_touch_title.wait_for(state='visible')
         expect(self.__get_in_touch_title).to_be_visible()
@@ -38,24 +34,14 @@ class ContactUs():
         self.__subject_field.fill("QWERTY")
         self.__your_message_here_field.fill("qwertyqwerty")
 
-    # def handle_dialog(self, dialog):
-    #     if "Press OK to proceed!" in dialog.message:
-    #         print(f'clicking "Yes" to {dialog.message}')
-    #         dialog.accept()  # press "Yes"
-    #     else:
-    #         dialog.dismiss()  # press "No"
-
     def upload_file(self) -> None:
         self.__choose_file_button.set_input_files("data/test.txt")
 
     def click_on_submit_button(self) -> None:
-        # self.page.on("dialog", self.handle_dialog)
         self.__submit_button.click()
         self.page.on("dialog", lambda dialog: dialog.accept())
         self.__submit_button.click()
 
-
     def success_message_is_visible(self) -> None:
         self.__success_message.wait_for(state='visible')
         expect(self.__success_message).to_be_visible()
-

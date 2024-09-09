@@ -27,8 +27,6 @@ class EnterAccountInformation():
         self.__address_information_mobile_number = self.page.locator('input[data-qa="mobile_number"]')
         self.__address_information_create_account_btn = self.page.locator('button[data-qa="create-account"]')
 
-
-
     def check_enter_account_information_label_is_visible(self) -> None:
         self.__enter_account_information_label.wait_for(state='visible')
         expect(self.__enter_account_information_label).to_be_visible()

@@ -15,7 +15,6 @@ class Cart():
         self.__checkout_message = self.page.get_by_text('Register / Login account to proceed on checkout.')
         self.__register_login_link = self.page.locator('p[class="text-center"]').locator("nth=1")
 
-
     def check_subscription_text_is_visible(self) -> None:
         self.__subscription_text.wait_for(state='visible')
         expect(self.__subscription_text).to_be_visible()
@@ -34,14 +33,14 @@ class Cart():
         self.__shopping_cart_text.wait_for(state='visible')
         expect(self.__shopping_cart_text).to_be_visible()
 
-    def check_product_exists(self,product_name) -> None:
+    def check_product_exists(self, product_name) -> None:
         expect(self.__cart_info_table.get_by_text(product_name)).to_be_visible()
 
-    def check_product_quantity(self,nth,expected_quantity) -> None:
+    def check_product_quantity(self, nth, expected_quantity) -> None:
         quantity = self.__cart_info_table.locator("xpath=//td[@class='cart_quantity']/button").locator("nth=" + nth)
         expect(quantity).to_have_text(expected_quantity)
 
-    def check_product_price(self,nth,expected_price) -> None:
+    def check_product_price(self, nth, expected_price) -> None:
         quantity = self.__cart_info_table.locator("xpath=//td[@class='cart_price']/p").locator("nth=" + nth)
         expect(quantity).to_have_text(expected_price)
 

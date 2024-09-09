@@ -23,42 +23,55 @@ class Main():
         self.__view_cart_link = self.page.locator('//a[@href=\'/view_cart\']').locator("nth=1")
         self.__contact_us_button = self.page.locator('a[href="/contact_us"]')
 
-
     def check_main_page_is_opened(self) -> None:
         self.__main_logo.wait_for(state='visible')
         expect(self.__main_logo).to_be_visible()
-        if self.__consent_button.count()>0:
+        if self.__consent_button.count() > 0:
             self.__consent_button.click()
 
     def click_on_sign_up_login_button(self) -> None:
         self.__sign_up_login_button.click()
-    def check_logged_in_username(self,name) -> None:
-        expect(self.__logged_in_as_label).to_have_text('Logged in as '+name)
+
+    def check_logged_in_username(self, name) -> None:
+        expect(self.__logged_in_as_label).to_have_text('Logged in as ' + name)
+
     def click_on_delete_account_button(self) -> None:
         self.__delete_account_button.click()
+
     def click_on_logout_button(self) -> None:
         self.__logout_button.click()
+
     def click_on_test_cases_button(self) -> None:
         self.__test_cases_button.click()
+
     def click_on_products_button(self) -> None:
         self.__products_button.click()
+
     def check_subscription_text_is_visible(self) -> None:
         self.__subscription_text.wait_for(state='visible')
         expect(self.__subscription_text).to_be_visible()
-    def enter_email_in_your_email_address_field(self,email) -> None:
+
+    def enter_email_in_your_email_address_field(self, email) -> None:
         self.__your_email_address_field.fill(email)
+
     def click_on_subscribe_button(self) -> None:
         self.__subscribe_button.click()
-    def success_message_is_visible(self,text) -> None:
+
+    def success_message_is_visible(self, text) -> None:
         self.__success_message.wait_for(state='visible')
         expect(self.__success_message).to_have_text(text)
+
     def click_on_cart_button(self) -> None:
         self.__cart_button.click()
+
     def click_on_view_product_button(self) -> None:
         self.__view_product_button.click()
+
     def add_product_to_cart(self, product_name) -> None:
         self.__add_to_cart_button.click()
+
     def click_on_view_cart_link(self) -> None:
         self.__view_cart_link.click()
+
     def click_on_contact_us_button(self) -> None:
         self.__contact_us_button.click()

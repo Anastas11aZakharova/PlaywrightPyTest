@@ -5,14 +5,13 @@ class Payment():
     def __init__(self, page: Page):
         self.page = page
 
-        self.__payment_header =  self.page.get_by_text('Payment').locator("nth=0")
+        self.__payment_header = self.page.get_by_text('Payment').locator("nth=0")
         self.__name_on_card_field = self.page.locator('input[data-qa="name-on-card"]')
         self.__card_number_field = self.page.locator('input[data-qa="card-number"]')
         self.__cvc_field = self.page.locator('input[data-qa="cvc"]')
         self.__expiration_month_field = self.page.locator('input[data-qa="expiry-month"]')
         self.__expiration_year_field = self.page.locator('input[data-qa="expiry-year"]')
         self.__pay_and_confirm_order_button = self.page.locator('button[data-qa="pay-button"]')
-
 
     def check_payment_header_is_visible(self) -> None:
         self.__payment_header.wait_for(state='visible')

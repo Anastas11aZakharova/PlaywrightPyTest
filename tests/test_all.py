@@ -226,10 +226,10 @@ class Test:
         self.cart_page.shopping_cart_text_is_visible()
         self.cart_page.check_product_exists(blue_top)
         self.cart_page.check_product_exists(men_tshirt)
-        self.cart_page.check_product_quantity("0","1")
-        self.cart_page.check_product_quantity("1","1")
-        self.cart_page.check_product_price("0",top_price)
-        self.cart_page.check_product_price("1",tshirt_price)
+        self.cart_page.check_product_quantity("0", "1")
+        self.cart_page.check_product_quantity("1", "1")
+        self.cart_page.check_product_price("0", top_price)
+        self.cart_page.check_product_price("1", tshirt_price)
         take_screenshot(self.page, 'add_prodcuts_to_cart')
 
     @pytest.mark.cart
@@ -308,20 +308,3 @@ class Test:
         take_screenshot(self.page, 'registered_before_checkout')
         self.order_placed_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

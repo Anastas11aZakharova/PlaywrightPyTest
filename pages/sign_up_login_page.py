@@ -15,23 +15,23 @@ class SignUpLogin():
         self.__error_message = self.page.get_by_text('Your email or password is incorrect!')
         self.__email_error_message = self.page.get_by_text('Email Address already exist!')
 
-
-
     def check_new_user_sign_up_label_is_visible(self) -> None:
         self.__new_user_sign_up_label.wait_for(state='visible')
         expect(self.__new_user_sign_up_label).to_be_visible()
 
     def enter_name(self, name) -> None:
         self.__name_field.fill(name)
+
     def enter_email(self, email) -> None:
         self.__email_field.fill(email)
 
     def click_on_sign_up_button(self) -> None:
         self.__sign_up_btn.click()
 
-    def enter_login_email(self,email) -> None:
+    def enter_login_email(self, email) -> None:
         self.__login_email_field.fill(email)
-    def enter_login_password(self,password) -> None:
+
+    def enter_login_password(self, password) -> None:
         self.__login_password_field.fill(password)
 
     def click_on_login_button(self) -> None:
@@ -46,6 +46,3 @@ class SignUpLogin():
         expect(self.__email_error_message).to_be_visible()
 
         # self.page.pause()
-
-
-
