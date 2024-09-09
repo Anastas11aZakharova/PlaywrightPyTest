@@ -44,5 +44,3 @@ class SignUpLogin():
     def check_email_error_message_is_visible(self) -> None:
         self.__email_error_message.wait_for(state='visible')
         expect(self.__email_error_message).to_be_visible()
-
-        # self.page.pause()

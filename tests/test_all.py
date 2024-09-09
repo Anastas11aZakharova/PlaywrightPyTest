@@ -1,4 +1,5 @@
 import pytest
+from faker import Faker
 
 from pages.main_page import Main
 from pages.sign_up_login_page import SignUpLogin
@@ -14,7 +15,7 @@ from pages.payment_page import Payment
 from pages.order_placed_page import OrderPlaced
 from pages.contact_us_page import ContactUs
 from utils.tools import take_screenshot
-from utils.common_steps import register_new_random_user,checkout_products,perform_login
+from utils.common_steps import register_new_random_user, checkout_products, perform_login, register_new_user
 
 
 class Test:
@@ -47,59 +48,72 @@ class Test:
 
     @pytest.mark.registration_and_login
     def test_valid_login(self, test_setup):
+        fake = Faker()
         self.main_page.check_main_page_is_opened()
         self.main_page.click_on_sign_up_login_button()
-        register_new_random_user(self)
+        email = fake.email()
+        password = fake.password()
+        name = fake.first_name()
+        register_new_user(self, email, password, name)
         self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
-        perform_login(self,'thomas@email.com','asdfg')
-        self.main_page.check_logged_in_username('Thomas')
+        perform_login(self, email, password)
+        self.main_page.check_logged_in_username(name)
         take_screenshot(self.page, 'valid_login')
         self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
     @pytest.mark.registration_and_login
     def test_invalid_login(self, test_setup):
+        fake = Faker()
         self.main_page.check_main_page_is_opened()
         self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
-        perform_login(self, 'qwerty@email.com', 'qwerty')
+        perform_login(self, fake.email(), fake.password())
         self.sign_up_login_page.check_error_message_is_visible()
         take_screenshot(self.page, 'invalid_login')
 
     @pytest.mark.registration_and_login
     def test_logout(self, test_setup):
+        fake = Faker()
         self.main_page.check_main_page_is_opened()
         self.main_page.click_on_sign_up_login_button()
-        register_new_random_user(self)
+        email = fake.email()
+        password = fake.password()
+        name = fake.first_name()
+        register_new_user(self, email, password, name)
         self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
-        perform_login(self, 'thomas@email.com', 'asdfg')
-        self.main_page.check_logged_in_username('Thomas')
+        perform_login(self, email, password)
+        self.main_page.check_logged_in_username(name)
         self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         take_screenshot(self.page, 'logout')
-        perform_login(self,'thomas@email.com','asdfg')
-        self.main_page.check_logged_in_username('Thomas')
+        perform_login(self, email, password)
+        self.main_page.check_logged_in_username(name)
         self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
     @pytest.mark.registration_and_login
     def test_register_with_existing_email(self, test_setup):
+        fake = Faker()
         self.main_page.check_main_page_is_opened()
         self.main_page.click_on_sign_up_login_button()
-        register_new_random_user(self)
+        email = fake.email()
+        password = fake.password()
+        name = fake.first_name()
+        register_new_user(self, email, password, name)
         self.main_page.click_on_logout_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
         self.main_page.click_on_sign_up_login_button()
         self.sign_up_login_page.check_new_user_sign_up_label_is_visible()
-        self.sign_up_login_page.enter_name('John')
-        self.sign_up_login_page.enter_email('thomas@email.com')
+        self.sign_up_login_page.enter_name(fake.first_name())
+        self.sign_up_login_page.enter_email(email)
         self.sign_up_login_page.click_on_sign_up_button()
         self.sign_up_login_page.check_email_error_message_is_visible()
         take_screenshot(self.page, 'existing_email_error')
-        perform_login(self,'thomas@email.com','asdfg')
-        self.main_page.check_logged_in_username('Thomas')
+        perform_login(self, email, password)
+        self.main_page.check_logged_in_username(name)
         self.main_page.click_on_delete_account_button()
         self.account_deleted_page.account_deleted_message_is_visible()
 
@@ -207,8 +221,7 @@ class Test:
     @pytest.mark.registration_and_login
     def test_register_while_checkout(self, test_setup):
         self.main_page.check_main_page_is_opened()
-        blue_top = 'Blue Top'
-        self.main_page.add_product_to_cart(blue_top)
+        self.main_page.add_product_to_cart()
         self.main_page.click_on_view_cart_link()
         self.cart_page.shopping_cart_text_is_visible()
         self.cart_page.click_on_proceed_to_checkout_button()
@@ -227,8 +240,7 @@ class Test:
         self.main_page.check_main_page_is_opened()
         self.main_page.click_on_sign_up_login_button()
         register_new_random_user(self)
-        blue_top = 'Blue Top'
-        self.main_page.add_product_to_cart(blue_top)
+        self.main_page.add_product_to_cart()
         self.main_page.click_on_view_cart_link()
         self.cart_page.shopping_cart_text_is_visible()
         self.cart_page.click_on_proceed_to_checkout_button()
