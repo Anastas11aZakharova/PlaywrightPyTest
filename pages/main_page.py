@@ -27,7 +27,8 @@ class Main():
     def check_main_page_is_opened(self) -> None:
         self.__main_logo.wait_for(state='visible')
         expect(self.__main_logo).to_be_visible()
-        # self.__consent_button.click()
+        if self.__consent_button.count()>0:
+            self.__consent_button.click()
 
     def click_on_sign_up_login_button(self) -> None:
         self.__sign_up_login_button.click()
